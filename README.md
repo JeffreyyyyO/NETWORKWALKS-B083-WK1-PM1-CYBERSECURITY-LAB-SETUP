@@ -75,7 +75,7 @@ Additional target machines can be added to the same virtual network in future pr
 
 ---
 
-## ⚙️ Lab Configuration
+## Lab Configuration
 
 | Component       | Configuration   |
 | --------------- | ------------------  |
