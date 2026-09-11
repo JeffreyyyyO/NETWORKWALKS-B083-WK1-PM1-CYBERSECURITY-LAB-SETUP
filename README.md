@@ -52,7 +52,7 @@ The main objectives of this project are to:
 
 The lab provides an isolated and controlled environment for cybersecurity learning and authorized security testing.
 
-It can be used for activities such as:
+It will be used for activities such as:
 
 - Network reconnaissance
 - Port scanning
@@ -62,7 +62,7 @@ It can be used for activities such as:
 - Exploitation practice
 - Security-tool experimentation
 
-**Important:** This laboratory must only be used for systems that you own or have explicit permission to test. Do not use the lab or its tools to attack unauthorized systems.
+**Important:** This laboratory will only be used for systems that I own or have explicit permission to test. I will not use the lab or its tools to attack unauthorized systems.
 
 ---
 
@@ -71,7 +71,7 @@ It can be used for activities such as:
 ![](1-screenshot-title-image.png)
 
 
-Additional target machines can be added to the same virtual network in future projects.
+Additional target machines will be added to the same virtual network in future projects.
 
 ---
 
@@ -323,7 +323,7 @@ I learned how to configure and verify IPv4 addressing, subnet masks, gateways, a
 
 ### 4. VM Snapshots
 
-I learned that a clean snapshot should be created **before performing risky or experimental activities**.
+A clean snapshot should be created **before performing risky or experimental activities**.
 
 This provides a known-good recovery point for future cybersecurity exercises.
 
@@ -335,7 +335,7 @@ This is useful when trying to establish network uptime for VMs that may have IP 
 
 ### 6. Documentation
 
-I learned that documenting commands, configuration, screenshots, problems, and solutions is an important part of a professional cybersecurity project.
+Documenting commands, configuration, screenshots, problems, and solutions is an important part of a professional cybersecurity project.
 
 ---
 
