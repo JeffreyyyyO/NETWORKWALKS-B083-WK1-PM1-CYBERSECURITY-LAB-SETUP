@@ -80,10 +80,11 @@ Additional target machines can be added to the same virtual network in future pr
 
 | 🧩 Component       | ⚙️ Configuration   |
 | ------------------ | ------------------  |
+| 🖥️ Host Machine    | Lenovo Thinkpad T480 |
 | 🖥️ Host OS         | Windows 10 2021 LTSC |
-| 🧠 Host RAM        | 8 GB               |
+| 🧠 Host RAM        | 16 GB               |
 | ⚡ Processor       | Intel Core i5      |
-| 🧰 Hypervisor      | VirtualBox 7.2  |
+| 🧰 Hypervisor      | VirtualBox 7.2.6  |
 | 🐉 Security OS     | Kali Linux 2026.2  |
 | 🧠 Kali RAM        | 2048 MB            |
 | 🌐 Virtual Network | NAT Network        |
@@ -138,6 +139,8 @@ This will allow future attacker and target VMs to communicate within the lab.
 
 The Kali Linux virtual machine was downloaded from the official Kali Linux website and imported into VirtualBox.
 
+![](04_add_kali_vm.png)
+
 The VM network adapter was configured as follows:
 
 ```text
@@ -147,15 +150,22 @@ Network:     NatNetwork
 Adapter Type: Intel PRO/1000 MT Desktop
 ```
 
+![](05_configure_kali_network_settings.png)
+
 The VM was allocated:
 
 ```text
 RAM: 2048 MB
+Processors: 2
+Video Memory: 128 MB
 ```
-![](3-screenshot-kali-linux.png)
+The VM was booted to the desktop screen
+
+![](06_kali_desktop.png)
+
 A shared folder was also configured for transferring required files between the host operating system and the Kali VM.
 
-
+![](07_shared_folder_creation.png)
 
 ---
 
@@ -174,7 +184,31 @@ DNS: 8.8.8.8
 
 A consistent IP address makes it easier to document the lab and reference the Kali machine in future exercises.
 
-![](4-screenshot-kali-network-settings.png)
+![](08_kali_OS_network_settings.png)
+
+The network configuration was confirmed via the Terminal.
+
+![](09_kali_network_test_1.png) ![](10_kali_network_test_2.png)
+
+Network connectivity proved dysfunctional after ping test and browser test, so I applied the configuration to ignore duplicate addresses.
+
+![](11_network_dysfunction_1.png)
+
+![](12_network_dysfunction_2.png)
+
+I restarted the Kali VM to complete the application of the configuration.
+
+![](13_kali_restart.png)
+
+After restarting the VM, the network ping test and browser test proved successful
+
+![](14_successful_ping_test.png)
+
+![](15_successful_browser_test.png)
+
+I shut down the machine after the primary configurations were done.
+
+![](16_shut_down.png)
 
 ---
 
@@ -182,16 +216,19 @@ A consistent IP address makes it easier to document the lab and reference the Ka
 
 After completing the initial configuration, a VirtualBox snapshot was created.
 
-Example snapshot name:
+Snapshot name:
 
 ```text
-Clean Kali - Network Setup
+Freshly Configured Kali Snapshot
 ```
+
+![](17_kali_snapshot_config.png)
+
+![](18_kali_snapshot_done.png)
 
 The snapshot represents the clean baseline of the laboratory.
 
 If a future exercise changes or damages the VM configuration, the machine can be restored to this baseline.
-
 
 ---
 
@@ -227,35 +264,21 @@ Documenting problems is an important part of the project.
 
 ## Problem 1. Internet Connectivity After Static IP Configuration
 
-After manually configuring the IPv4 settings, Internet connectivity may fail depending on the Kali/NetworkManager configuration.
+After manually configuring the IPv4 settings, Internet connectivity failed.
 
-One workaround used during this lab was:
+The solution was to apply the following commands:
 
 ```bash
 sudo nmcli connection modify "Wired connection 1" ipv4.dad-timeout 0
+
+sudo nmcli connection down "Wired connection 1"
+
+sudo nmcli connection up "Wired connection 1"
 ```
 
-The network connection was then restarted/rebooted and connectivity was tested again.
+The network connection was then restarted and connectivity was tested again.
 
-> **Important:** Network interface and connection names may differ between systems. Students should first identify their actual connection name before running an `nmcli` command.
-
----
-
-## Problem 2. VirtualBox VT-x / Virtualization Error
-
-The VM initially failed to start because hardware virtualization was disabled in the system firmware/BIOS.
-
-The issue was resolved by:
-
-1. Restarting the computer.
-2. Entering BIOS/UEFI settings.
-3. Enabling Intel VT-x / hardware virtualization.
-4. Saving the configuration.
-5. Restarting the computer.
-6. Starting the Kali VM again.
-
-After enabling virtualization, the VM started successfully.
-
+The test failed, so the Kali VM was rebooted. The connection proved successful this time.
 
 ---
 
@@ -271,7 +294,7 @@ A standard NAT configuration and a NAT Network serve different purposes.
 
 A NAT Network allows multiple VMs connected to the same virtual network to communicate with one another while providing network address translation for external connectivity.
 
-This makes it useful for building a multi-machine cybersecurity laboratory.
+This makes it useful for building a multi-machine virtual cybersecurity laboratory.
 
 ### 2. Virtual Machine Networking
 
@@ -287,7 +310,13 @@ I learned that a clean snapshot should be created **before performing risky or e
 
 This provides a known-good recovery point for future cybersecurity exercises.
 
-### 5. Documentation
+### 5. Duplicate Address Detection Bypass
+
+I learned to bypass duplicate address detection **before performing risky or experimental activities**.
+
+This is useful when trying to establish network uptime for VMs that may have IP clashes with other VMs (which may be turned off at the time).
+
+### 6. Documentation
 
 I learned that documenting commands, configuration, screenshots, problems, and solutions is an important part of a professional cybersecurity project.
 
