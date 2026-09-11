@@ -48,7 +48,7 @@ The main objectives of this project are to:
 
 ---
 
-## 🛡️ Purpose of the Lab
+## Purpose of the Lab
 
 The lab provides an isolated and controlled environment for cybersecurity learning and authorized security testing.
 
