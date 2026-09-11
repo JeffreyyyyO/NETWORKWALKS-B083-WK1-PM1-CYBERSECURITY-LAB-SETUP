@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🔐 Cybersecurity Lab Environment Setup
+# Cybersecurity Lab Environment Setup
 
 **Building an isolated virtual lab for penetration testing and ethical hacking practice**
 </div>
@@ -22,7 +22,7 @@
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 This project focuses on setting up a **virtual cybersecurity and penetration-testing laboratory** using VirtualBox and Kali Linux.
 
@@ -33,7 +33,7 @@ The lab is configured on a private virtual network so that additional machines c
 ---
 
 
-## 🎯 Objectives
+## Objectives
 
 The main objectives of this project are to:
 
@@ -63,11 +63,11 @@ It can be used for activities such as:
 - Exploitation practice
 - Security-tool experimentation
 
-⚠️ **Important:** This laboratory must only be used for systems that you own or have explicit permission to test. Do not use the lab or its tools to attack unauthorized systems.
+**Important:** This laboratory must only be used for systems that you own or have explicit permission to test. Do not use the lab or its tools to attack unauthorized systems.
 
 ---
 
-## 🏗️ Lab Architecture
+## Lab Architecture
 
 ![](1-screenshot-title-image.png)
 
@@ -78,25 +78,25 @@ Additional target machines can be added to the same virtual network in future pr
 
 ## ⚙️ Lab Configuration
 
-| 🧩 Component       | ⚙️ Configuration   |
-| ------------------ | ------------------  |
-| 🖥️ Host Machine    | Lenovo Thinkpad T480 |
-| 🖥️ Host OS         | Windows 10 2021 LTSC |
-| 🧠 Host RAM        | 16 GB               |
-| ⚡ Processor       | Intel Core i5      |
-| 🧰 Hypervisor      | VirtualBox 7.2.6  |
-| 🐉 Security OS     | Kali Linux 2026.2  |
-| 🧠 Kali RAM        | 2048 MB            |
-| 🌐 Virtual Network | NAT Network        |
-| 📡 Network Address | 10.0.0.0/24        |
-| 🐧 Kali IP Address | 10.0.0.2/24        |
-| 🚪 Default Gateway | 10.0.0.1           |
-| 🌍 DNS Server      | 8.8.8.8            |
-| 🔮 Future VM Range | 10.0.0.3–10.0.0.99 |
+| Component       | Configuration   |
+| --------------- | ------------------  |
+| Host Machine    | Lenovo Thinkpad T480 |
+| Host OS         | Windows 10 2021 LTSC |
+| Host RAM        | 16 GB               |
+| Processor       | Intel Core i5      |
+| Hypervisor      | VirtualBox 7.2.6  |
+| Security OS     | Kali Linux 2026.2  |
+| Kali RAM        | 2048 MB            |
+| Virtual Network | NAT Network        |
+| Network Address | 10.0.0.0/24        |
+| Kali IP Address | 10.0.0.2/24        |
+| Default Gateway | 10.0.0.1           |
+| DNS Server      | 8.8.8.8            |
+| Future VM Range | 10.0.0.3–10.0.0.99 |
 
 ---
 
-# 🪜 Lab Setup Procedure
+# Lab Setup Procedure
 
 ## Step 1. Install 7-Zip
 
@@ -188,7 +188,9 @@ A consistent IP address makes it easier to document the lab and reference the Ka
 
 The network configuration was confirmed via the Terminal.
 
-![](09_kali_network_test_1.png) ![](10_kali_network_test_2.png)
+![](09_kali_network_test_1.png)
+
+![](10_kali_network_test_2.png)
 
 Network connectivity proved dysfunctional after ping test and browser test, so I applied the configuration to ignore duplicate addresses.
 
@@ -232,16 +234,32 @@ If a future exercise changes or damages the VM configuration, the machine can be
 
 ---
 
-# 🔎 Lab Verification
+## Step 7. Configure 'Drag-and-Drop' and 'Shared Clipboard' Features
 
-| ✅ Test                        | 🧾 Command                      | 🎯 Expected Result              |
-| ----------------------------- | ------------------------------- | ------------------------------- |
-| 🌐 Check IP address           | `ip a`                          | Correct Kali IP displayed       |
-| 📡 Test gateway               | `ping 10.0.0.1`                 | Successful replies              |
-| 🌍 Test Internet connectivity | `ping 8.8.8.8`                  | Successful replies              |
-| 🔎 Test DNS resolution        | `nslookup networkwalks.com`     | Domain resolves                 |
-| 🧰 Verify Nmap                | `nmap --version`                | Nmap version displayed          |
-| 🔄 Verify snapshot            | Restore snapshot and run `ip a` | Baseline configuration restored |
+In order to enable the transfer of files between the host machine and the virtual machine, as well as enabling a shared clipboard for easy copying and pasting across machines, the features need to be enabled in the VirtuaBox KaliVM settings, and VBox Guest Additions should be installed.
+
+I enabled the 'Drag-and-Drop' and 'Shared Clipboard' features from the VirtualBox settings.
+
+![](19_drag-and-drop_shared-clipboard.png)
+
+The VBox Guest Additions image (VBox_GAs_7.2.6) was installed in the Kali VM.
+
+![](20_vbox-gas_installation.png)
+
+'Drag-and-Drop' and 'Shared Clipboard' features are now enabled.
+
+---
+
+# Lab Verification
+
+| Test                       | Command                         | Expected Result                 |
+| -------------------------- | ------------------------------- | ------------------------------- |
+| Check IP address           | `ip a`                          | Correct Kali IP displayed       |
+| Test gateway               | `ping 10.0.0.1`                 | Successful replies              |
+| Test Internet connectivity | `ping 8.8.8.8`                  | Successful replies              |
+| Test DNS resolution        | `nslookup networkwalks.com`     | Domain resolves                 |
+| Verify Nmap                | `nmap --version`                | Nmap version displayed          |
+| Verify snapshot            | Restore snapshot and run `ip a` | Baseline configuration restored |
 
 ### Example Results
 
@@ -258,11 +276,11 @@ DNS:
 
 ---
 
-# 🐞 Problems Encountered & Solutions
+# Problems Encountered & Solutions
 
 Documenting problems is an important part of the project.
 
-## Problem 1. Internet Connectivity After Static IP Configuration
+## Problem: Internet Connectivity After Static IP Configuration
 
 After manually configuring the IPv4 settings, Internet connectivity failed.
 
@@ -282,7 +300,7 @@ The test failed, so the Kali VM was rebooted. The connection proved successful t
 
 ---
 
-# 💡 What I Learned
+# What I Learned
 
 Through this project, I learned how to create and configure a virtual environment for cybersecurity practice.
 
@@ -322,13 +340,13 @@ I learned that documenting commands, configuration, screenshots, problems, and s
 
 ---
 
-# 🔐 Security & Ethical Use
+# Security & Ethical Use
 
 This laboratory is intended strictly for education purposes only.
 
 ---
 
-# 🔗 Tools & Resources
+# Tools & Resources
 
 - **7-Zip:** [https://7-zip.org/download.html](https://7-zip.org/download.html)
 - **VirtualBox:** [https://virtualbox.org/wiki/Downloads](https://virtualbox.org/wiki/Downloads)
@@ -336,15 +354,15 @@ This laboratory is intended strictly for education purposes only.
 
 ---
 
-# 👤 Author
+# Author
 
 **Jeffrey Obi**\
-Cybersecurity Professional B082
+Cybersecurity Professional B083
 
 LinkedIn: [https://www.linkedin.com/in/jeffreyyyyo/](https://www.linkedin.com/in/jeffreyyyyo/)
 
 ---
 
-## 📌 Project Information
+## Project Information
 
 **Program Name:** Cybersecurity at Networkwalks | **Week:** 01 | **Project:** Cybersecurity & Pentesting Lab Setup | **Repository:** GitHub
